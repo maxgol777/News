@@ -17,28 +17,24 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
 import com.example.newstestapp.feature_news.domain.model.Article
-import com.example.newstestapp.feature_news.presentation.navigation.NewsScreens
+import com.example.newstestapp.feature_news.presentation.screens.destinations.DetailScreenDestination
 import com.example.newstestapp.feature_news.presentation.util.getTimeSpanInDays
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
 fun ArticleRow(
     article: Article,
-    navController: NavController
+    navController: DestinationsNavigator
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(5.dp)
             .clickable {
-                val encodedUrl =
-                    URLEncoder.encode(article.url, StandardCharsets.UTF_8.toString())
-                navController.navigate(route = NewsScreens.DetailsScreen.name + "/${encodedUrl}")
+                navController.navigate(DetailScreenDestination(article.url))
             },
         shape = RoundedCornerShape(corner = CornerSize(16.dp)),
         elevation = 5.dp

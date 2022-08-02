@@ -7,8 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import com.example.newstestapp.feature_news.presentation.navigation.NewsNavigation
+import com.example.newstestapp.feature_news.presentation.screens.NavGraphs
 import com.example.newstestapp.ui.theme.NewsTestAppTheme
+import com.ramcosta.composedestinations.DestinationsNavHost
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    NewsNavigation()
+                    DestinationsNavHost(navGraph = NavGraphs.root)
                 }
             }
         }

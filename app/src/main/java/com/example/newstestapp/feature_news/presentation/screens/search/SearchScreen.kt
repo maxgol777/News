@@ -21,12 +21,15 @@ import androidx.navigation.NavController
 import com.example.newstestapp.R
 import com.example.newstestapp.feature_news.presentation.screens.search.components.ArticleRow
 import com.example.newstestapp.feature_news.presentation.screens.search.components.CommonTextField
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
+@Destination(start = true)
 fun SearchScreen(
+    navigator: DestinationsNavigator,
     newsViewModel: NewsViewModel = hiltViewModel(),
-    navController: NavController
 ) {
     val state = newsViewModel.state
     state.error?.let { showToast(LocalContext.current, it) }
@@ -54,7 +57,7 @@ fun SearchScreen(
                 if (doNeedToLoad(i, state = state)) {
                     newsViewModel.loadNextItems()
                 }
-                ArticleRow(article, navController)
+                ArticleRow(article, navigator)
             }
             item {
                 if (state.isLoading) {
