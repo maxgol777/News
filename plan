@@ -1,3 +1,7 @@
-1. Upgrade dependencies
+1. Upgrade dependencies +
 2. Upgrade navigation (StockMarketApp) +
+
 3. Change Git files for commit
+4. Unit tests
+5. Instrumental tests
+6. Change error message call

@@ -17,16 +17,17 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.example.newstestapp.R
 import com.example.newstestapp.feature_news.presentation.screens.search.components.ArticleRow
 import com.example.newstestapp.feature_news.presentation.screens.search.components.CommonTextField
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-@Destination(start = true)
+@RootNavGraph(start = true)
+@Destination
 fun SearchScreen(
     navigator: DestinationsNavigator,
     newsViewModel: NewsViewModel = hiltViewModel(),

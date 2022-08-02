@@ -13,11 +13,13 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
 import com.example.newstestapp.feature_news.domain.model.Article
 import com.example.newstestapp.feature_news.presentation.screens.destinations.DetailScreenDestination
@@ -75,11 +77,12 @@ fun ArticleRow(
 fun WeatherStateImage(imageUrl: String?) {
     imageUrl?.let {
         Image(
-            painter = rememberImagePainter(it,
-                builder = {
-                    crossfade(true)
-                    transformations(CircleCropTransformation())
-                }
+            painter = rememberAsyncImagePainter(
+                ImageRequest.Builder(LocalContext.current).data(it)
+                    .apply(block = fun ImageRequest.Builder.() {
+                        crossfade(true)
+                        transformations(CircleCropTransformation())
+                    }).build()
             ),
             contentDescription = " icon image",
             modifier = Modifier.size(80.dp),

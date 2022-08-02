@@ -45,10 +45,6 @@ class NewsViewModel @Inject constructor(
         }
     )
 
-    init {
-        //loadNextItems()
-    }
-
     fun loadNextItems() {
         viewModelScope.launch {
             paginator.loadNextItems()

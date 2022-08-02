@@ -1,6 +1,5 @@
 package com.example.newstestapp.feature_news.presentation.screens.detail
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import com.example.newstestapp.feature_news.presentation.screens.detail.components.WebPageViewer
 import com.ramcosta.composedestinations.annotation.Destination
