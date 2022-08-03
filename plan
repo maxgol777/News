@@ -1,7 +1,8 @@
 1. Upgrade dependencies +
 2. Upgrade navigation (StockMarketApp) +
-
-3. Change Git files for commit
-4. Unit tests
-5. Instrumental tests
-6. Change error message call
+3. Change error message call +
+4. Change Git files for commit  ???
+5. Unit tests
+6. Instrumental tests
+7. Trigger request after enter press
+8. Replace by custom Result class like in example

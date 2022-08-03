@@ -1,8 +1,7 @@
-package com.example.newstestapp.feature_news.data.network
+package com.example.newstestapp.feature_news.data.remote
 
 import com.example.newstestapp.feature_news.data.utils.Constants
 import com.example.newstestapp.feature_news.data.utils.Util
-import com.example.newstestapp.feature_news.domain.model.News
 import retrofit2.http.GET
 import retrofit2.http.Query
 import javax.inject.Singleton
@@ -18,5 +17,5 @@ interface NewsApi {
         @Query("pageSize") pageSize: Int,
         @Query("sortBy") sortBy: String = "publishedAt",
         @Query("apiKey") apiKey: String = Constants.API_KEY
-    ): News
+    ): NewsDto
 }
