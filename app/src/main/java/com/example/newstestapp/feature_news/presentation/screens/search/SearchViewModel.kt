@@ -5,7 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.newstestapp.feature_news.data.remote.ArticleDto
+import com.example.newstestapp.feature_news.domain.news.Article
+import com.example.newstestapp.feature_news.domain.news.News
 import com.example.newstestapp.feature_news.domain.repository.NewsRepository
 import com.example.newstestapp.feature_news.presentation.screens.search.pagination.DefaultPaginator
 import com.example.newstestapp.feature_news.presentation.screens.search.pagination.Paginator
@@ -26,17 +27,18 @@ class NewsViewModel @Inject constructor(
     var state by mutableStateOf(ScreenState())
         private set
 
-    var request: suspend (nextKey: Int) -> Result<List<ArticleDto>> = { nextPage ->
+    var request: suspend (nextKey: Int) -> Result<News> = { nextPage ->
         repository.getNews(
             query = "",
             pageNumber = nextPage,
             pageSize = DEFAULT_PAGE_SIZE
         )
     }
-    private val paginator: Paginator<Int, ArticleDto> = DefaultPaginator(
+    private val paginator: Paginator<Int, Article> = DefaultPaginator(
         initialKey = state.page,
         onLoadUpdated = { state = state.copy(isLoading = it) },
-        onRequest = { request(it) },
+        onRequest = {
+                nextKey -> request(nextKey).mapCatching { it.articles } },
         getNextKey = {
             state.page + 1
         },
@@ -80,7 +82,7 @@ class NewsViewModel @Inject constructor(
 
 data class ScreenState(
     val isLoading: Boolean = false,
-    val items: List<ArticleDto> = emptyList(),
+    val items: List<Article> = emptyList(),
     val endReached: Boolean = false,
     val page: Int = 1
 )

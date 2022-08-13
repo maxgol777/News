@@ -1,6 +1,6 @@
 package com.example.newstestapp.feature_news.data.remote
 
 data class SourceDto(
-    val id: Any,
-    val name: String
+    val id: Any? = null,
+    val name: String?
 )

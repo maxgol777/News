@@ -7,3 +7,5 @@
 7. Trigger request after enter press
 8. Replace by custom Resource class like in example ???
 9. Create cool readme file with screenshots
+10. After click on Article (Skipped 52 frames!  The application may be doing too much work on its main thread.)
+10a sometimes error while page loading

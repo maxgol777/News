@@ -21,14 +21,14 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
-import com.example.newstestapp.feature_news.data.remote.ArticleDto
+import com.example.newstestapp.feature_news.domain.news.Article
 import com.example.newstestapp.feature_news.presentation.screens.destinations.DetailScreenDestination
 import com.example.newstestapp.feature_news.presentation.util.getTimeSpanInDays
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
 fun ArticleRow(
-    articleDto: ArticleDto,
+    article: Article,
     navController: DestinationsNavigator
 ) {
     Card(
@@ -36,7 +36,7 @@ fun ArticleRow(
             .fillMaxWidth()
             .padding(5.dp)
             .clickable {
-                navController.navigate(DetailScreenDestination(articleDto.url))
+                navController.navigate(DetailScreenDestination(article.url))
             },
         shape = RoundedCornerShape(corner = CornerSize(16.dp)),
         elevation = 5.dp
@@ -51,10 +51,10 @@ fun ArticleRow(
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                WeatherStateImage(imageUrl = articleDto.imageUrl)
+                WeatherStateImage(imageUrl = article.imageUrl)
                 Text(
                     modifier = Modifier.padding(start = 10.dp),
-                    text = articleDto.title,
+                    text = article.title ?: "",
                     fontSize = 20.sp,
                     color = Color.Black
                 )
@@ -63,12 +63,12 @@ fun ArticleRow(
                 modifier = Modifier
                     .padding(5.dp)
                     .align(Alignment.Start),
-                text = "${getTimeSpanInDays(articleDto.publishedAt)} days ago",
+                text = "${getTimeSpanInDays(article.publishedAt ?: "")} days ago",
                 color = Color.LightGray,
                 style = MaterialTheme.typography.h6
             )
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = articleDto.description)
+            Text(text = article.description ?: "")
         }
     }
 }

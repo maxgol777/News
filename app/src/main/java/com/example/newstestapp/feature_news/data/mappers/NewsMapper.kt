@@ -7,14 +7,22 @@ import com.example.newstestapp.feature_news.domain.news.Article
 import com.example.newstestapp.feature_news.domain.news.News
 import com.example.newstestapp.feature_news.domain.news.Source
 
-fun NewsDto.toNews(): News {
+fun NewsDto.toNews(): News = News(
+    articles = articles.map { articleDto -> articleDto.toArticle() },
+    status = status,
+    totalResults
+)
 
-}
+fun ArticleDto.toArticle(): Article =
+    Article(
+        author,
+        content,
+        description,
+        publishedAt,
+        source?.toSource(),
+        title,
+        url,
+        imageUrl
+    )
 
-fun ArticleDto.toArticle(): Article {
-
-}
-
-fun SourceDto.toSource(): Source {
-
-}
+fun SourceDto.toSource(): Source = Source(id, name)
